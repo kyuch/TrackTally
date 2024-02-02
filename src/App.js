@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
     const CLIENT_ID = "fb16e1064e7746ba8578ae848092e02f";
-    const REDIRECT_URI = "http://localhost:3000";
+    const REDIRECT_URI = "https://kyuch.github.io/TrackTally/";
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
     const RESPONSE_TYPE = "token";
     const SCOPES = "user-top-read";

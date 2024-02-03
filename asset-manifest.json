@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/TrackTally/static/css/main.0e0a5060.css",
-    "main.js": "/TrackTally/static/js/main.ebca32f9.js",
+    "main.js": "/TrackTally/static/js/main.bb116605.js",
     "static/js/787.f53a26f4.chunk.js": "/TrackTally/static/js/787.f53a26f4.chunk.js",
     "index.html": "/TrackTally/index.html",
     "main.0e0a5060.css.map": "/TrackTally/static/css/main.0e0a5060.css.map",
-    "main.ebca32f9.js.map": "/TrackTally/static/js/main.ebca32f9.js.map",
+    "main.bb116605.js.map": "/TrackTally/static/js/main.bb116605.js.map",
     "787.f53a26f4.chunk.js.map": "/TrackTally/static/js/787.f53a26f4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0e0a5060.css",
-    "static/js/main.ebca32f9.js"
+    "static/js/main.bb116605.js"
   ]
 }

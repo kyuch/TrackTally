@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import './App.css';
+import profile_pic from './/images/profile.png';
+import spotify_logo from './/images/spotify-api.png'
 
 function App() {
     const CLIENT_ID = "fb16e1064e7746ba8578ae848092e02f";
@@ -46,7 +48,7 @@ function App() {
             headers: {'Authorization' : 'Bearer ' + token}
         });
         const data = await result.json();
-        var pic = "profile.png";
+        var pic = profile_pic;
         var username = data.display_name;
         try {
             pic = data.images[0].url;
@@ -79,12 +81,13 @@ function App() {
         const data = await result.json();
         for (var i = 0; i < data.items.length; i++) {
             var artist_name = data.items[i].name;
-            var pic = "profile.png";
+            var pic = profile_pic;
+            var artist_link = data.items[i].external_urls.spotify;
             try {
                 var pic = data.items[i].images[0].url;
             } catch (e) {}
 
-            artists.push({ name: artist_name, pic: pic });
+            artists.push({ name: artist_name, pic: pic, link: artist_link});
         }
         setArtists(artists)
     }
@@ -95,15 +98,12 @@ function App() {
         switch(term){
             case "short":
                 input = 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=' + amt;
-                console.log(input)
                 break
             case "medium":
                 input = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=' + amt;
-                console.log(input)
                 break
             case "long":
                 input = 'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=' + amt;
-                console.log(input)
                 break
             default:
                 console.log("error with getTracks: term length parameter is incorrect");
@@ -118,12 +118,13 @@ function App() {
         for (var i = 0; i < data.items.length; i++) {
             var track_name = data.items[i].name;
             var track_artist = data.items[i].album.artists[0].name;
-            var track_pic = "profile.png";
+            var track_pic = profile_pic;
+            var track_link = data.items[i].external_urls.spotify;
             try {
                 var track_pic = data.items[i].album.images[0].url;
             } catch (e) {}
 
-            tracks.push({ name: track_name, artist: track_artist, pic: track_pic});
+            tracks.push({ name: track_name, artist: track_artist, pic: track_pic, link: track_link});
             setTracks(tracks);
         }
     }
@@ -158,13 +159,14 @@ function App() {
                                 <div style={styles.artistInfo}>
                                     <span style={styles.artistName}>{item.name}</span>
                                 </div>
+                                <a href={item.link} style={styles.artistHref}><img src={spotify_logo} width={40} height={40} alt={"spotify.com"}/></a>
+
                             </li>
                         ))}
                     </ul>
                 </div>
             )
-        }
-        else if(artistList.length < 1 && user.length > 0) {
+        } else if (artistList.length < 1 && user.length > 0) {
             return (
             <div style={styles.container}>
                 <h2 style={styles.heading}>You don't have any top artists during this period!</h2>
@@ -192,13 +194,13 @@ function App() {
                                     <span style={styles.trackName}>{item.name}</span>
                                     <span style={styles.trackArtistName}>{item.artist}</span>
                                 </div>
+                                <a href={item.link} style={styles.artistHref}><img src={spotify_logo} width={40} height={40} alt={"spotify.com"}/></a>
                             </li>
                         ))}
                     </ul>
                 </div>
             )
-        }
-        else if(trackList.length <= 0 && user.length > 0) {
+        } else if (trackList.length <= 0 && user.length > 0) {
             return (
                 <div style={styles.container2}>
                     <h2 style={styles.heading2}>You don't have any top tracks during this period!</h2>
@@ -347,7 +349,7 @@ function App() {
         //artistlist below
         container: {
             fontFamily: 'Arial, sans-serif',
-            maxWidth: '350px',
+            width: '350px',
             margin: 'auto',
             padding: '30px',
             position: 'fixed',
@@ -393,13 +395,18 @@ function App() {
             fontSize: '1.2em',
             color: '#232323',
             fontWeight: 'bold',
-            display: 'block',
+            display: 'inline-block',
             marginBottom: '5px',
+        },
+        artistHref:{
+            marginLeft: 'auto',
+            display: 'inline-block',
+            marginRight: '10px'
         },
         //item list below
         container2: {
             fontFamily: 'Arial, sans-serif',
-            maxWidth: '350px',
+            width: '350px',
             margin: 'auto',
             padding: '30px',
             position: 'fixed',

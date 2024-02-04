@@ -84,7 +84,7 @@ function App() {
             var pic = profile_pic;
             var artist_link = data.items[i].external_urls.spotify;
             try {
-                var pic = data.items[i].images[0].url;
+                pic = data.items[i].images[0].url;
             } catch (e) {}
 
             artists.push({ name: artist_name, pic: pic, link: artist_link});
@@ -121,7 +121,7 @@ function App() {
             var track_pic = profile_pic;
             var track_link = data.items[i].external_urls.spotify;
             try {
-                var track_pic = data.items[i].album.images[0].url;
+                track_pic = data.items[i].album.images[0].url;
             } catch (e) {}
 
             tracks.push({ name: track_name, artist: track_artist, pic: track_pic, link: track_link});
@@ -159,7 +159,7 @@ function App() {
                                 <div style={styles.artistInfo}>
                                     <span style={styles.artistName}>{item.name}</span>
                                 </div>
-                                <a href={item.link} style={styles.artistHref}><img src={spotify_logo} width={40} height={40} alt={"spotify.com"}/></a>
+                                <a href={item.link} style={styles.artistHref} target={"_blank"} rel={"noopener noreferrer"}><img src={spotify_logo} width={40} height={40} alt={"spotify.com"}/></a>
 
                             </li>
                         ))}
@@ -194,7 +194,7 @@ function App() {
                                     <span style={styles.trackName}>{item.name}</span>
                                     <span style={styles.trackArtistName}>{item.artist}</span>
                                 </div>
-                                <a href={item.link} style={styles.artistHref}><img src={spotify_logo} width={40} height={40} alt={"spotify.com"}/></a>
+                                <a href={item.link} style={styles.artistHref} target={"_blank"} rel={"noopener noreferrer"}><img src={spotify_logo} width={40} height={40} alt={"spotify.com"}/></a>
                             </li>
                         ))}
                     </ul>
@@ -296,7 +296,7 @@ function App() {
             textDecoration: 'none',
             color: '#007bff',
             padding: '8px 16px',
-            background: '#fff',
+            background: '#fff0f0',
             border: '1px solid #007bff',
             borderRadius: '4px',
             cursor: 'pointer',
@@ -496,6 +496,19 @@ function App() {
             backgroundColor: '#f8f8f8',
             appearance: 'none',
         },
+        //login stuff below
+        fancyHeader: {
+            textAlign: 'center',
+            backgroundColor: '#3498db',
+            color: '#ffffff',
+            padding: '20px',
+            borderRadius: '10px',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        },
+        fancyHeaderText: {
+            fontSize: '24px',
+            margin: '0',
+        },
 
     };
 
@@ -503,7 +516,7 @@ function App() {
     return (
         <div style={styles.appContainer}>
             <header style={styles.header}>
-                <h1>Your Spotify Stats</h1>
+                <h1>TrackTally</h1>
                 {!token ? (
                     <a
                         href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${encodeURIComponent(SCOPES)}`}
@@ -524,9 +537,18 @@ function App() {
                 {termDropdown()}
                 {amtDropdown()}
             </div>
+            {!token ? (
+                <div>
+                    <header style={styles.fancyHeader}>
+                        <h1 style={styles.fancyHeaderText}>Log in to find your favorite artists and songs!</h1>
+                    </header>
+                </div>
+            ) : (console.log("yo"))
+            }
+
+
         </div>
     );
-
 
 
 }

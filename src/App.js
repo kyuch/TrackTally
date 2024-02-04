@@ -376,7 +376,7 @@ function App() {
             alignItems: 'center',
             background: '#fff',
             borderRadius: '1200px',
-            overflow: 'scroll',
+            overflow: 'hidden',
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
             maxWidth: '350px',
         },
@@ -433,7 +433,7 @@ function App() {
             alignItems: 'center',
             background: '#fff',
             borderRadius: '1200px',
-            overflow: 'scroll',
+            overflow: 'hidden',
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
             maxWidth: '350px',
         },
@@ -545,8 +545,6 @@ function App() {
                 </div>
             ) : (console.log("yo"))
             }
-
-
         </div>
     );
 
